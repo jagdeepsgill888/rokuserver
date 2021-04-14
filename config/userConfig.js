@@ -2,9 +2,11 @@
 const sqlCreds = {
     user: "root",
     password: "",
+    // password: "root",
     host: "localhost",
     port: 3306,
-    database: "a4_w20_roku"
+    // port: 8889,
+    database: "a4_flasback_roku"
 }
 
 module.exports = sqlCreds;
