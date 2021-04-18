@@ -55,4 +55,88 @@ router.get("/movies/:id", (req, res) => {
     });
 })
 
+router.get("/kidsmovies", (req, res) => {
+    connect.getConnection(function(err, connection) {
+        if (err) throw err; // not connected!
+       
+        // Use the connection
+        connection.query('SELECT * FROM tbl_kmovies', function (error, results) {
+          // When done with the connection, release it.
+          connection.release();
+       
+          // Handle error after the release.
+          if (error) throw error;
+       
+          res.json(results);
+        });
+    });
+})
+
+
+router.get("/kidsmovies/:id", (req, res) => {
+    connect.query(`SELECT * FROM tbl_movies WHERE kmovies_id=${req.params.id}`, function (error, results) {
+
+        if (error) throw error;
+        
+        res.json(results);
+    });
+})
+
+router.get("/songs", (req, res) => {
+    
+
+    connect.getConnection(function(err, connection) {
+        if (err) throw err; 
+       
+        
+        connection.query('SELECT * FROM tbl_songs', function (error, results) {
+          
+          connection.release();
+       
+          
+          if (error) throw error;
+          res.json(results);
+       
+          
+        });
+      });
+  })
+
+  router.get("/song/:id", (req, res) => {
+    
+    connect.query(`SELECT * FROM tbl_songs WHERE songs_id=${req.params.id}`, function (error, results) {
+        if (error) throw error;
+        res.json(results);
+      });
+  })
+  
+
+  router.get("/kidsongs", (req, res) => {
+    
+
+    connect.getConnection(function(err, connection) {
+        if (err) throw err; 
+       
+        
+        connection.query('SELECT * FROM tbl_ksongs', function (error, results) {
+          
+          connection.release();
+       
+          
+          if (error) throw error;
+          res.json(results);
+       
+          
+        });
+      });
+  })
+
+  router.get("/kidsongs/:id", (req, res) => {
+    
+    connect.query(`SELECT * FROM tbl_songs WHERE ksongs_id=${req.params.id}`, function (error, results) {
+        if (error) throw error;
+        res.json(results);
+      });
+  })
+
 module.exports = router;
